@@ -850,40 +850,28 @@
             }
         }
     </style>
-
-    @vite('resources/css/app.css')
-
 </head>
-<body class="">
-<div class="container mx-auto py-[50px]">
-    <div class="flex flex-col">
-        <a href="{{route('posts.index')}}">Posts</a>
-        <a href="{{route('categories.index')}}">Categories</a>
-        <div class="py-[100px]" >
-            <ul class="flex gap-x-5 " >
-                @foreach($categories as $category)
-                    <li class="px-[20px] py-[10px] bg-black text-white cursor-pointer   rounded-3xl  " >
-                        <span class="font-medium" >
-                            {{$category->name}}
-                        </span>
-                    </li>
-                @endforeach
-            </ul>
+<body class="font-sans antialiased dark:bg-black dark:text-white/50">
+   <div>
+       Post Create
 
-            <ul class="flex gap-x-5">
-                @foreach($posts as $post)
-                    <li class="px-[20px] py-[10px] bg-black text-white cursor-pointer rounded-3xl">
-                        <span class="font-medium">
-                            {{$post->title}}
-                        </span>
-                    </li>
-                @endforeach
-            </ul>
+       <form class="flex flex-col" action="{{route('posts.store')}}" method="POST">
+           @csrf
+           <label for="title">
+               <span>Title:</span>
+               <input id="title" class="border-2" type="text" name="title">
+           </label>
+           <label for="categoryID">
+               <span>categoryID:</span>
+               <input id="categoryID" class="border-2" type="text" name="category_id">
+           </label>
+           <label for="content">
+               <span>Content:</span>
+               <textarea id="content" type="text" name="content"></textarea>
+           </label>
+           <button class="" type="submit">Create Post</button>
+       </form>
 
-        </div>
-
-    </div>
-</div>
-
+   </div>
 </body>
 </html>
