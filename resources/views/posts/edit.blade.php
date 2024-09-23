@@ -29,6 +29,17 @@
                     <input id="title"  placeholder="title" value="{{$post->title}}" class="mt-1 px-[10px] py-[12px] block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" type="text" name="title">
                 </div>
                 <div>
+                    <label for="categoryID" class="block text-sm font-medium text-gray-700">
+                        Category:
+                    </label>
+                    <select id="categoryID" name="category_id"
+                            class="mt-1 px-[10px] py-[12px] block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
                     <label for="content" class="block text-sm font-medium text-gray-700">
                         Content:
                     </label>

@@ -80,6 +80,7 @@
     <h1 class="text-2xl font-semibold mb-6">Posts</h1>
 
     <div class="bg-white p-6 rounded-lg shadow-lg">
+
         @foreach($posts as $post)
             <div class="p-4 border-b border-gray-200 flex justify-between last:border-0">
                 <div class="flex flex-col gap-y-2">
@@ -90,6 +91,12 @@
                     <div>
                         <span class="text-lg font-medium">Content:</span>
                         <span class="text-lg font-medium">{{$post->content}}</span>
+                    </div>
+                    <div>
+                        <span class="text-lg font-medium">Category:</span>
+                        <span class="text-lg font-medium">
+                         {{ $post->category ? $post->category->name : 'Uncategorized' }} <!-- Добавлена проверка -->
+                        </span>
                     </div>
                 </div>
 
@@ -133,6 +140,7 @@
                                        class="mt-1 px-[10px] py-[12px] block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                        type="text" name="code">
                             </div>
+
                         </div>
 
                         <button id="submitButtonEdit"

@@ -11,7 +11,7 @@ class PostController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $posts = Post::all();
+        $posts = Post::with('category')->get();
         return view('posts.index', ['posts' => $posts, 'categories' => $categories]);
     }
 
@@ -27,6 +27,7 @@ class PostController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'content' => 'required',
+            'category_id' => 'required',
         ]);
 
         $post = Post::create($validatedData);
@@ -45,17 +46,27 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::findOrFail($id);
-        return view('posts.edit', ['post' => $post]);
+        return view('posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
 
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
 
+        // Валидация входящих данных
+        $validatedData = $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required',
+            'category_id' => 'required|exists:categories,id', // Проверка существования категории
+        ]);
+
+        // Обновление свойств поста
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
+        $post->category_id = $validatedData['category_id']; // Правильное присваивание категории
         $post->save();
 
         return redirect()->route('posts.index')->with('success', 'Post updated!');

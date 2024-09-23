@@ -37,6 +37,16 @@
                         {{$post->content}}
                     </div>
                 </div>
+
+                <div>
+                    <label for="code" class="block text-sm font-medium text-gray-700">
+                        Category:
+                    </label>
+                    <div class="mt-1 px-[10px] py-[12px] block w-full  rounded-md  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        {{$post->category->name}}
+                    </div>
+                </div>
+
             </div>
             <a href="{{route('posts.index')}}" type="button" id="closeModalBtnUpdate" class="absolute top-[10px] right-[10px] text-black text-[30px] ">X</a>
 
